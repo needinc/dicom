@@ -743,7 +743,7 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 	if err != nil {
 		return nil, err
 	}
-	debug.Logf("readElement: tag: %s", t.String())
+	fmt.Printf("readElement: tag: %s", t.String())
 
 	readImplicit := r.rawReader.IsImplicit()
 	if *t == tag.Item {
@@ -755,13 +755,13 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 	if err != nil {
 		return nil, err
 	}
-	debug.Logf("readElement: vr: %s", vr)
+	fmt.Printf("readElement: vr: %s", vr)
 
 	vl, err := r.readVL(readImplicit, *t, vr)
 	if err != nil {
 		return nil, err
 	}
-	debug.Logf("readElement: vl: %d", vl)
+	fmt.Printf("readElement: vl: %d", vl)
 
 	val, err := r.readValue(*t, vr, vl, readImplicit, d, fc)
 	if err != nil {
