@@ -755,13 +755,18 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("readElement: vr: %s", vr)
+	fmt.Printf("readElement: vr: %s \n", vr)
 
 	vl, err := r.readVL(readImplicit, *t, vr)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Printf("readElement: vl: %d", vl)
+	fmt.Printf("readElement: vl: %d \n", vl)
+
+	if t.Group%2 != 0 { // zero out private tags
+		println("zeroing out private tag")
+		return &Element{Tag: *t, ValueRepresentation: tag.GetVRKind(*t, vr), RawValueRepresentation: vr, ValueLength: 0, Value: nil}, nil
+	}
 
 	val, err := r.readValue(*t, vr, vl, readImplicit, d, fc)
 	if err != nil {
