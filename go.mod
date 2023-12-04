@@ -1,4 +1,4 @@
-module github.com/suyashkumar/dicom
+module github.com/needinc/dicom
 
 go 1.18
 
