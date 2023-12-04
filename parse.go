@@ -68,6 +68,7 @@ func ParseUntilEOF(in io.Reader, frameChan chan *frame.Frame, opts ...ParseOptio
 func parseInternal(in io.Reader, bytesToRead int64, frameChan chan *frame.Frame, opts ...ParseOption) (Dataset, error) {
 	p, err := NewParser(in, bytesToRead, frameChan, opts...)
 	if err != nil {
+		println("Error creating parser")
 		return Dataset{}, err
 	}
 
@@ -142,6 +143,7 @@ func NewParser(in io.Reader, bytesToRead int64, frameChannel chan *frame.Frame, 
 		debug.Log("NewParser: readHeader")
 		elems, err = p.reader.readHeader()
 		if err != nil {
+			println("Error reading header")
 			return nil, err
 		}
 		debug.Log("NewParser: readHeader complete")
@@ -281,8 +283,8 @@ func SkipPixelData() ParseOption {
 // a PixelData element will be added to the dataset with the
 // PixelDataInfo.IntentionallyUnprocessed = true, and the raw bytes of the
 // entire PixelData element stored in PixelDataInfo.UnprocessedValueData.
-// 
-// In the future, we may be able to extend this functionality to support 
+//
+// In the future, we may be able to extend this functionality to support
 // on-demand processing of elements elsewhere in the library.
 func SkipProcessingPixelDataValue() ParseOption {
 	return func(set *parseOptSet) {
