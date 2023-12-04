@@ -27,12 +27,12 @@ import (
 	"io"
 	"os"
 
-	"github.com/suyashkumar/dicom/pkg/charset"
-	"github.com/suyashkumar/dicom/pkg/debug"
-	"github.com/suyashkumar/dicom/pkg/dicomio"
-	"github.com/suyashkumar/dicom/pkg/frame"
-	"github.com/suyashkumar/dicom/pkg/tag"
-	"github.com/suyashkumar/dicom/pkg/uid"
+	"github.com/needinc/dicom/pkg/charset"
+	"github.com/needinc/dicom/pkg/debug"
+	"github.com/needinc/dicom/pkg/dicomio"
+	"github.com/needinc/dicom/pkg/frame"
+	"github.com/needinc/dicom/pkg/tag"
+	"github.com/needinc/dicom/pkg/uid"
 )
 
 const (
