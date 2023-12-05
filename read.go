@@ -755,6 +755,9 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 	if err != nil {
 		return nil, err
 	}
+	if vr == "UN" {
+		vr = "SQ"
+	}
 	debug.Logf("readElement: vr: %s", vr)
 
 	vl, err := r.readVL(readImplicit, *t, vr)
