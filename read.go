@@ -116,6 +116,7 @@ func (r *reader) readVL(isImplicit bool, t tag.Tag, vr string) (uint32, error) {
 }
 
 func (r *reader) readValue(t tag.Tag, vr string, vl uint32, isImplicit bool, d *Dataset, fc chan<- *frame.Frame) (Value, error) {
+	fmt.Printf("readValue: tag: %s vr: %s vl: %d isImplicit: %t\n", t.String(), vr, vl, isImplicit)
 	vrkind := tag.GetVRKind(t, vr)
 	// TODO: if we keep consistent function signature, consider a static map of VR to func?
 	switch vrkind {
@@ -763,7 +764,7 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 	}
 	fmt.Printf("readElement: vl: %d \n", vl)
 
-	if t.Group%2 != 0 { // zero out private tags
+	if t.Group%2 != 0 || vr == "NA" { // zero out private tags
 		println("zeroing out private tag")
 		return &Element{Tag: *t, ValueRepresentation: tag.GetVRKind(*t, vr), RawValueRepresentation: vr, ValueLength: 0, Value: nil}, nil
 	}
