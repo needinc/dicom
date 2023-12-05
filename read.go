@@ -766,9 +766,9 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 
 	if t.Group%2 != 0 || vr == "NA" { // zero out private tags
 		println("zeroing out private tag")
-		return &Element{Tag: *t, ValueRepresentation: tag.GetVRKind(*t, vr), RawValueRepresentation: vr, ValueLength: 0, Value: Value: &stringsValue{
+		return &Element{Tag: *t, ValueRepresentation: tag.GetVRKind(*t, vr), RawValueRepresentation: vr, ValueLength: 0, Value: &stringsValue{
 			value: []string{""},
-		},}, nil
+		}}, nil
 	}
 
 	val, err := r.readValue(*t, vr, vl, readImplicit, d, fc)
