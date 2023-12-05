@@ -770,7 +770,14 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 
 	val, err := r.readValue(*t, vr, vl, readImplicit, d, fc)
 	if err != nil {
-		fmt.Println("Trying to read value", vr, vl, readImplicit, d, fc)
+		if d == nil {
+			fmt.Println("SEGSV Dataset is nil")
+		}
+		if fc == nil {
+			fmt.Println("SEGSV Frame channel is nil")
+		}
+
+		fmt.Println("SEGSV Trying to read value", vr, vl, readImplicit)
 		log.Println("error reading value ", err)
 		return nil, err
 	}
