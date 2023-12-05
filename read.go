@@ -772,7 +772,7 @@ func (r *reader) readElement(d *Dataset, fc chan<- *frame.Frame) (*Element, erro
 		return nil, err
 	}
 	retElem := &Element{Tag: *t, ValueRepresentation: tag.GetVRKind(*t, vr), RawValueRepresentation: vr, ValueLength: vl, Value: val}
-	fmt.Println(retElem.String())
+	//fmt.Println(retElem.String())
 	return retElem, nil
 
 }
