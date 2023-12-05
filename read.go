@@ -521,6 +521,8 @@ func (r *reader) readSequence(t tag.Tag, vr string, vl uint32, d *Dataset) (Valu
 				// This is an error, should be an Item!
 				// TODO: use error var
 				log.Println("Tag is ", subElement.Tag)
+				fmt.Println("Value type is ", subElement.Value.ValueType())
+				fmt.Println("Tag is ", subElement.Tag)
 				return nil, fmt.Errorf("non item found in sequence")
 			}
 
